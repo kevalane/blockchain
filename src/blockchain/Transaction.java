@@ -2,12 +2,14 @@ package blockchain;
 
 public class Transaction {
 	
+	private int id;
 	private String sender;
 	private String receiver;
 	private String signature;
 	private double amount;
 	
-	public Transaction (String sender, String receiver, String signature, double amount) {
+	public Transaction (int id, String sender, String receiver, String signature, double amount) {
+		this.id = id;
 		this.sender = sender;
 		this.receiver = receiver;
 		this.signature = signature;
@@ -15,6 +17,10 @@ public class Transaction {
 	}
 	
 	// Getter
+	public int getId() {
+		return this.id;
+	}
+	
 	public String getSender() {
 		return this.sender;
 	}
