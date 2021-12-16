@@ -12,10 +12,20 @@ public class Miner {
 		this.header = header;
 		this.difficulty = difficulty;
 		this.prefix = this.fixPrefix();
-		System.out.println(this.mine());
+		this.start();
 	}
 	
-	private String mine () throws NoSuchAlgorithmException {
+	private void start() throws NoSuchAlgorithmException {
+		long startTime = System.nanoTime();
+		String proofOfWorkHash = this.mine();
+		long endTime = System.nanoTime();
+		long duration = (endTime-startTime)/1000000000;
+		System.out.println("Proof of work hash: " + proofOfWorkHash);
+		System.out.println("Nonce: " + String.valueOf(this.nonce));
+		System.out.println("Blocktime: " + String.valueOf(duration) + "s");
+	}
+	
+	private String mine() throws NoSuchAlgorithmException {
 		this.nonce = 0;
 		Hash hash = new Hash(this.header + String.valueOf(this.nonce));
 		while (!hash.getHash().startsWith(this.prefix)) {
