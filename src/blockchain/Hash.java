@@ -30,6 +30,11 @@ public class Hash {
 	private String toHex(byte[] hash) {
 		BigInteger num = new BigInteger(1, hash);
 		StringBuilder hex = new StringBuilder(num.toString(16));
+		System.out.println(hex.length());
+		// Padding with zeroes
+		while (hex.length() < 64) {
+			hex.insert(0, '0');
+		}
 		System.out.println(hex);
 		return hex.toString();
 	}
