@@ -6,8 +6,17 @@ import java.security.NoSuchAlgorithmException;
 
 public class Hash {
 	
-	public Hash() {
-		
+	private String rawInput;
+	private String hash;
+	
+	public Hash(String rawInput) throws NoSuchAlgorithmException {
+		this.rawInput = rawInput;
+		this.hash = this.toHex(this.getSHA(rawInput));
+	}
+	
+	// Getters
+	public String getHash() {
+		return this.hash;
 	}
 	
 	// Convert rawdata to sha256 byte array
