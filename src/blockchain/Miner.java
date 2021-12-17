@@ -7,6 +7,7 @@ public class Miner {
 	private String header;
 	private int difficulty;
 	private String prefix;
+	private String proofOfWorkHash;
 	
 	public Miner (String header, int difficulty) throws NoSuchAlgorithmException {
 		this.header = header;
@@ -15,12 +16,21 @@ public class Miner {
 		this.start();
 	}
 	
+	// Getters
+	public String getNonce() {
+		return String.valueOf(this.nonce);
+	}
+	
+	public String getProofOfWorkHash() {
+		return this.proofOfWorkHash;
+	}
+	
 	private void start() throws NoSuchAlgorithmException {
 		long startTime = System.nanoTime();
-		String proofOfWorkHash = this.mine();
+		this.proofOfWorkHash = this.mine();
 		long endTime = System.nanoTime();
 		long duration = (endTime-startTime)/1000000000;
-		System.out.println("Proof of work hash: " + proofOfWorkHash);
+		System.out.println("Proof of work hash: " + this.proofOfWorkHash);
 		System.out.println("Nonce: " + String.valueOf(this.nonce));
 		System.out.println("Blocktime: " + String.valueOf(duration) + "s");
 	}
