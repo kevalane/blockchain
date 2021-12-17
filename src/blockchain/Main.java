@@ -24,6 +24,9 @@ public class Main {
 		genesisBlock.addTransaction(t3);
 		genesisBlock.addTransaction(t4);
 		System.out.println(genesisBlock.getRawData());
+		Miner miner = new Miner(genesisBlock.getRawData(), 5);
+		
+		Block genesisBlockPlus1 = new Block(genesisBlock.getHash());
 	}
 
 }

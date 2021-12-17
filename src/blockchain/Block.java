@@ -14,6 +14,20 @@ public class Block {
 		this.transactions = new ArrayList<Transaction>();
 	}
 	
+	// Getters
+	public String getHash() {
+		return this.hash;
+	}
+	
+	// Setters
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+	
+	public void setNonce(String nonce) {
+		this.nonce = nonce;
+	}
+	
 	public void addTransaction(Transaction t) {
 		this.transactions.add(t);
 	}
