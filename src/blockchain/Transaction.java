@@ -37,6 +37,10 @@ public class Transaction {
 		return this.amount;
 	}
 	
+	public String getRawString() {
+		return String.valueOf(this.id) + this.sender + this.receiver + this.signature + String.valueOf(this.amount);
+	}
+	
 	
 	
 }
