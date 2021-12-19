@@ -22,9 +22,9 @@ public class Main {
 		genesisBlock.addTransaction(t1);
 		genesisBlock.addTransaction(t2);
 		genesisBlock.addTransaction(t3);
-		genesisBlock.addTransaction(t4);
+//		genesisBlock.addTransaction(t4);
 		System.out.println(genesisBlock.getRawData());
-		Miner miner = new Miner(genesisBlock.getRawData(), 6);
+		Miner miner = new Miner(genesisBlock.getRawData(), 5);
 		
 		// Update genesis block
 		genesisBlock.setHash(miner.getProofOfWorkHash());
@@ -33,9 +33,9 @@ public class Main {
 		Block genesisBlockPlus1 = new Block(genesisBlock.getHash());
 		genesisBlockPlus1.addTransaction(t1);
 		genesisBlockPlus1.addTransaction(t2);
-		genesisBlockPlus1.addTransaction(t3);
+		genesisBlockPlus1.addTransaction(t4);
 		System.out.println(genesisBlockPlus1.getRawData());
-		Miner miner2 = new Miner(genesisBlockPlus1.getRawData(), 6);
+		Miner miner2 = new Miner(genesisBlockPlus1.getRawData(), 5);
 	}
 
 }
