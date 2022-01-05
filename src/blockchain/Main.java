@@ -5,6 +5,34 @@ import java.security.NoSuchAlgorithmException;
 public class Main {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException {
+
+		String message = "Hello World";
+		try {
+			Sign sign = new Sign();
+			String signature = sign.signMessage(message, sign.getPrivateKey());
+			System.out.println(signature);
+			boolean verification = sign.verify(message, signature, sign.getPublicKey());
+			System.out.println(verification);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //		try {
 //			Miner miner = new Miner("thisIsAHeader", 4);
 //		} catch (Exception e) {
