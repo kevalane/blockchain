@@ -35,13 +35,6 @@ public class Main {
 		// System.out.println(genesisBlockPlus1.getRawData());
 		// Miner miner2 = new Miner(genesisBlockPlus1.getRawData(), 4);
 
-		try {
-			Sign sign = new Sign();
-			System.out.println(sign.signMessage("Hello wold"));
-			sign.verify(sign.signMessage("Hello wold"));
-		} catch (Exception e) {
-			System.out.println(e);
-		}
 	}
 
 }
