@@ -12,7 +12,7 @@ public class Sign {
 
     public Sign() throws Exception {
         this.keyPair = this.getKeyPair();
-        sig = Signature.getInstance("SHA1WithRSA");
+        sig = Signature.getInstance("SHA256WithRSA");
     }
 
     public String signMessage(String message) throws Exception {
@@ -33,6 +33,12 @@ public class Sign {
         
     }
 
+    /*
+    * Generates a keypair
+    * @param none
+    * @throws NoSuchAlgorithmException if method not found
+    * @return the generated keypair <KeyPair>
+    */
     private KeyPair getKeyPair() throws NoSuchAlgorithmException {
         KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
         kpg.initialize(2048);
