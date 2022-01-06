@@ -34,7 +34,7 @@ public class Hash {
 		while (hex.length() < 64) {
 			hex.insert(0, '0');
 		}
-//		System.out.println(hex.toString());
+		System.out.println(hex.toString());
 		return hex.toString();
 	}
 
