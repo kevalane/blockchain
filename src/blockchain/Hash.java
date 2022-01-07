@@ -9,28 +9,44 @@ public class Hash {
 	private String rawInput;
 	private String hash;
 	
+	/**
+	 * Constructor
+	 * @param rawInput, the string to be hashed
+	 * @throws NoSuchAlgorithmException
+	 */
 	public Hash(String rawInput) throws NoSuchAlgorithmException {
 		this.rawInput = rawInput;
-		this.hash = this.toHex(this.getSHA(rawInput));
+		this.hash = toHex(getSHA(rawInput));
 	}
 	
-	// Getters
+	/**
+	 * Function to get the hash
+	 * @return hash attribute
+	 */
 	public String getHash() {
 		return this.hash;
 	}
 	
-	// Convert rawdata to sha256 byte array
-	private byte[] getSHA(String rawData) throws NoSuchAlgorithmException {
+	/**
+	 * Convert rawdata to sha256 byte array
+	 * @param rawData, a string of raw data (as in constructor)
+	 * @return byte[] array of corresponding hash
+	 * @throws NoSuchAlgorithmException
+	 */
+	private static byte[] getSHA(String rawData) throws NoSuchAlgorithmException {
 		MessageDigest md;
 		md = MessageDigest.getInstance("SHA-256");
 		return md.digest(rawData.getBytes(StandardCharsets.UTF_8));
 	}
 	
-	// Convert sha256 byte array to hex string
-	private String toHex(byte[] hash) {
+	/**
+	 * Convert sha256 byte array to hex string
+	 * @param hash, byte array of sha256 hash to convert
+	 * @return string of hash in base16
+	 */
+	private static String toHex(byte[] hash) {
 		BigInteger num = new BigInteger(1, hash);
 		StringBuilder hex = new StringBuilder(num.toString(16));
-		// Padding with zeroes
 		while (hex.length() < 64) {
 			hex.insert(0, '0');
 		}
