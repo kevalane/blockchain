@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Main {
 
+	
 	public static void main(String[] args) throws NoSuchAlgorithmException {
 
 		String message = "Hello World";
@@ -42,7 +43,7 @@ public class Main {
 		Transaction t1 = new Transaction(1, "Bo2b", "Alice", "feaaef", 10);
 		Transaction t2 = new Transaction(2, "Alic2e", "Charlie", "feaaefef", 5);
 		Transaction t3 = new Transaction(3, "Ch1ar2lie", "Bob", "afeaefaefaef", 20);
-		Transaction t4 = new Transaction(4, "Ali2ce", "Bob", "grsagrf", 50);
+		// Transaction t4 = new Transaction(4, "Ali2ce", "Bob", "grsagrf", 50);
 		
 		Hash genesisHash = new Hash("genesisblock");
 		Block genesisBlock = new Block(genesisHash.getHash());

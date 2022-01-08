@@ -26,6 +26,14 @@ public class Hash {
 	public String getHash() {
 		return this.hash;
 	}
+
+	/**
+	 * Return raw input used to compute hash
+	 * @return String of raw input
+	 */
+	public String getRawInput() {
+		return this.rawInput;
+	}
 	
 	/**
 	 * Convert rawdata to sha256 byte array
