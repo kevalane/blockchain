@@ -20,6 +20,14 @@ public class Block {
 	public String getHash() {
 		return this.hash;
 	}
+
+	/**
+	 * Getter of nonce
+	 * @return return string nonce
+	 */
+	public String getNonce() {
+		return this.nonce;
+	}
 	
 	// Setters
 	public void setHash(String hash) {
