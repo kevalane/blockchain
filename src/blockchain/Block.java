@@ -11,7 +11,8 @@ public class Block {
 	
 	/**
 	 * Constructor, sets prevHash and initiates ArrayList for transactions in block.
-	 * @param prevHash, string format of previous hash.
+	 * @param prevHash
+	 * 		string format of previous hash.
 	 */
 	public Block(String prevHash) {
 		this.prevHash = prevHash;
@@ -36,7 +37,8 @@ public class Block {
 	
 	/**
 	 * Set hash (when proof of work hash is found)
-	 * @param hash in base64 string format
+	 * @param hash 
+	 * 		in base64 string format
 	 */
 	public void setHash(String hash) {
 		this.hash = hash;
@@ -44,7 +46,8 @@ public class Block {
 	
 	/**
 	 * Setter of the nonce, also after proof of work hash is found
-	 * @param nonce string format
+	 * @param nonce 
+	 * 		string format
 	 */
 	public void setNonce(String nonce) {
 		this.nonce = nonce;
@@ -52,7 +55,8 @@ public class Block {
 	
 	/**
 	 * Add transaction to the arraylist of transactions
-	 * @param t the transaction of type Transaction
+	 * @param t 
+	 * 		the transaction of type Transaction
 	 * @throws NoSuchAlgorithmException
 	 */
 	public void addTransaction(Transaction t) throws NoSuchAlgorithmException {
