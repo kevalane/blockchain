@@ -9,14 +9,20 @@ public class Block {
 	private String nonce;
 	private String hash;
 	
+	/**
+	 * Constructor, sets prevHash and initiates ArrayList for transactions in block.
+	 * @param prevHash
+	 * 		string format of previous hash.
+	 */
 	public Block(String prevHash) {
-		// TODO - implement BlockHeader class
-		// Generally, go through https://www.oreilly.com/library/view/mastering-bitcoin/9781491902639/ch01.html
 		this.prevHash = prevHash;
 		this.transactions = new ArrayList<Transaction>();
 	}
 	
-	// Getters
+	/**
+	 * Getter for hash
+	 * @return hash of block (proof of work hash) in base16 string
+	 */
 	public String getHash() {
 		return this.hash;
 	}
@@ -29,22 +35,40 @@ public class Block {
 		return this.nonce;
 	}
 	
-	// Setters
+	/**
+	 * Set hash (when proof of work hash is found)
+	 * @param hash 
+	 * 		in base64 string format
+	 */
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
 	
+	/**
+	 * Setter of the nonce, also after proof of work hash is found
+	 * @param nonce 
+	 * 		string format
+	 */
 	public void setNonce(String nonce) {
 		this.nonce = nonce;
 	}
 	
-	// Add transactions
+	/**
+	 * Add transaction to the arraylist of transactions
+	 * @param t 
+	 * 		the transaction of type Transaction
+	 * @throws NoSuchAlgorithmException
+	 */
 	public void addTransaction(Transaction t) throws NoSuchAlgorithmException {
 		this.transactions.add(t);
 		this.updateMerkleRoot();
 	}
 	
-	// Update merkleRoot
+	/**
+	 * This is not merkle root, tree structure will be built in the future.
+	 * Currently just taking all transaction data, appending to a string and hashing.
+	 * @throws NoSuchAlgorithmException
+	 */
 	private void updateMerkleRoot() throws NoSuchAlgorithmException {
 		StringBuilder allTx = new StringBuilder("");
 		for (int i = 0; i < this.transactions.size(); i++) {
@@ -54,6 +78,11 @@ public class Block {
 		this.merkleRoot = merkleHash.getHash();
 	}
 	
+	/**
+	 * Get the raw data of the block.
+	 * Concatenated prevHash and merkle root
+	 * @return String of concatenated rawData.
+	 */
 	public String getRawData() {
 		StringBuilder returnString = new StringBuilder("");
 		returnString.append(this.prevHash);
