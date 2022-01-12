@@ -2,6 +2,8 @@ package blockchain;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
+import blockchain.tx.Transaction;
+
 public class Block {
 	private String prevHash;
 	private ArrayList<Transaction> transactions;

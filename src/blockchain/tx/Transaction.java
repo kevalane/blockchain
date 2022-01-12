@@ -1,4 +1,4 @@
-package blockchain;
+package blockchain.tx;
 
 public class Transaction {
 	
