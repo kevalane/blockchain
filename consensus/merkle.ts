@@ -15,18 +15,35 @@ let mt3: MerkleTree = new MerkleTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
  */
 class MerkleTree {
     private merkleRootHash: string;
-    // private merkleRootNode: MerkleTreeNode;
+    private height: number;
+    private merkleRootNode: MerkleTreeNode | null;
 
     constructor(transactions: any[]) {
         this.merkleRootHash = "";
-        // this.mer kleRootNode = new MerkleTreeNode();
+        this.height = 0;
+        this.merkleRootNode = null;
         this.createMerkleTree(transactions);
     }
 
     private createMerkleTree(transactions: any[]) {
         const paddedTransactions: any[] = this.padTransactions(transactions);
         const leafNodes: Array<MerkleTreeNode> = this.createLeafNodes(paddedTransactions);
-        console.log(leafNodes);
+        this.height = Math.log2(leafNodes.length) + 1;
+        this.merkleRootNode = this.createMerkleNodes(leafNodes)[0]; // root node
+        this.merkleRootHash = this.merkleRootNode.getHash(); // now we have created root hash
+    }
+
+    private createMerkleNodes(children: Array<MerkleTreeNode>): Array<MerkleTreeNode> {
+        if (children.length <= 1) return children;
+        let upperLevelNodes: Array<MerkleTreeNode> = new Array<MerkleTreeNode>();
+        for (let i = 0; i < children.length; i += 2) {
+            upperLevelNodes.push(new MerkleTreeNode(
+                createHash('sha256').update(children[i].getHash() + children[i+1].getHash()).digest('hex'),
+                children[i],
+                children[i+1]
+            ));
+        }
+        return this.createMerkleNodes(upperLevelNodes);
     }
 
     /**
@@ -91,27 +108,27 @@ class MerkleTreeNode {
         this.merkleHash = hash;
     }
 
-    private getHash(): string {
+    public getHash(): string {
         return this.merkleHash;
     }
 
-    private getLeftNode(): MerkleTreeNode | null {
+    public getLeftNode(): MerkleTreeNode | null {
         return this.leftNode;
     }
 
-    private getRightNode(): MerkleTreeNode | null{
+    public getRightNode(): MerkleTreeNode | null{
         return this.rightNode;
     }
 
-    private setHash(hash: string): void {
+    public setHash(hash: string): void {
         this.merkleHash = hash;
     }
 
-    private setLeftNode(n: MerkleTreeNode): void {
+    public setLeftNode(n: MerkleTreeNode): void {
         this.leftNode = n;
     }
 
-    private setRightNode(n: MerkleTreeNode): void {
+    public setRightNode(n: MerkleTreeNode): void {
         this.rightNode = n;
     }
 }
