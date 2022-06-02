@@ -1,5 +1,15 @@
+/*
+TODO: Add these test cases
+let mt1: MerkleTree = new MerkleTree([1, 2, 3, 4, 5]);
+
+let mt2: MerkleTree = new MerkleTree([1, 2, 3, 4, 5, 6, 7]);
+
+let mt3: MerkleTree = new MerkleTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+*/
+
 /**
  * Create Merkle Tree from an array of transactions
+ * 
  */
 class MerkleTree {
     private merkleRootHash: string;
@@ -7,7 +17,7 @@ class MerkleTree {
 
     constructor(transactions: any[]) {
         this.merkleRootHash = "";
-        // this.merkleRootNode = new MerkleTreeNode();
+        // this.mer kleRootNode = new MerkleTreeNode();
         this.createMerkleTree(transactions);
     }
 
@@ -35,8 +45,19 @@ class MerkleTree {
         for (let i = 0; i < nearestDownwards; i++) {
             returnArray[i] = transactions[i];
         }
-        for (let i = nearestDownwards; i < nearestUpwards; i++) {
-
+        for (let i = nearestDownwards; i < transactions.length; i++) {
+            returnArray[i] = transactions[i]; // add all transactions explicit
+        }
+        for (let i = transactions.length; i < nearestUpwards; i ++) {
+            if ((nearestUpwards - transactions.length) % 2 == 0) {
+                // evenly divisible => last two needed for padding
+                returnArray[i] = transactions[transactions.length - 2];
+                returnArray[i+1] = transactions[transactions.length - 1];
+                i++;
+            } else {
+                // only last needed
+                returnArray[i] = transactions[transactions.length - 1];
+            }
         }
         return returnArray;
     }
