@@ -2,6 +2,8 @@ package blockchain;
 
 import java.security.NoSuchAlgorithmException;
 
+import blockchain.tx.Transaction;
+
 public class Main {
 
 	
