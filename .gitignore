@@ -1,6 +1,6 @@
 # UPDATED .gitignore for typescript
 node_modules/
-
+*.js
 
 
 # Compiled class file
