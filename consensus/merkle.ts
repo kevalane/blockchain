@@ -1,3 +1,5 @@
+import { createHash } from 'crypto';
+
 /*
 TODO: Add these test cases
 let mt1: MerkleTree = new MerkleTree([1, 2, 3, 4, 5]);
@@ -23,13 +25,28 @@ class MerkleTree {
 
     private createMerkleTree(transactions: any[]) {
         const paddedTransactions: any[] = this.padTransactions(transactions);
-        console.log(paddedTransactions);
+        const leafNodes: Array<MerkleTreeNode> = this.createLeafNodes(paddedTransactions);
+        console.log(leafNodes);
+    }
+
+    /**
+     * Creates MerkleTreeNodes of all our leafs
+     * @param tx the transactions (padded)
+     * @returns all our leafs an array
+     */
+    private createLeafNodes(tx: any[]): Array<MerkleTreeNode> {
+        let returnArray: Array<MerkleTreeNode> = new Array<MerkleTreeNode>(tx.length);
+        for (let i = 0; i < tx.length; i++) {
+            returnArray[i] = new MerkleTreeNode(createHash('sha256').update(tx[i].toString()).digest('hex'), null, null);
+        }
+        return returnArray;
     }
 
     /**
      * Helper function to create the base of merkle tree.
      * Has to be a power of 2 number of leafs in tree.
      * @param transactions the transactions in the block.
+     * @returns Array of transactions now padded
      */
     private padTransactions(transactions: any[]): Array<any> {
         let nearestUpwards: number = (1 << 31 - Math.clz32(transactions.length));
@@ -65,24 +82,24 @@ class MerkleTree {
 
 class MerkleTreeNode {
     private merkleHash: string;
-    private leftNode: MerkleTreeNode;
-    private rightNode: MerkleTreeNode;
+    private leftNode: MerkleTreeNode | null;
+    private rightNode: MerkleTreeNode | null;
 
-    constructor() {
-        this.leftNode = new MerkleTreeNode();
-        this.rightNode = new MerkleTreeNode();
-        this.merkleHash = "";
+    constructor(hash: string, left: MerkleTreeNode | null, right: MerkleTreeNode | null) {
+        this.leftNode = left;
+        this.rightNode = right;
+        this.merkleHash = hash;
     }
 
     private getHash(): string {
         return this.merkleHash;
     }
 
-    private getLeftNode(): MerkleTreeNode {
+    private getLeftNode(): MerkleTreeNode | null {
         return this.leftNode;
     }
 
-    private getRightNode(): MerkleTreeNode {
+    private getRightNode(): MerkleTreeNode | null{
         return this.rightNode;
     }
 
