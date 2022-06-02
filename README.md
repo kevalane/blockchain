@@ -4,7 +4,9 @@ Trying to learn more about blockchain technology by building one from the ground
 
 Will try to implement signing, transactions (and blocks), mining, broadcasting, etc. 
 
-## Language
+## Language (changed 06/02/2022)
+
+UPDATE: Will use typescript instead for simplicity of implementation.
 
 Using Java bc have to use it for my algo class next year.
 
