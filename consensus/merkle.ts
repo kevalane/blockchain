@@ -15,24 +15,38 @@ let mt3: MerkleTree = new MerkleTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
  */
 class MerkleTree {
     private merkleRootHash: string;
-    private height: number;
     private merkleRootNode: MerkleTreeNode | null;
 
     constructor(transactions: any[]) {
         this.merkleRootHash = "";
-        this.height = 0;
         this.merkleRootNode = null;
         this.createMerkleTree(transactions);
     }
 
+    /**
+     * Getter for merkleRootHash
+     * @returns MerkleRootHash
+     */
+    public getMerkleRootHash(): string {
+        return this.merkleRootHash;
+    }
+
+    /**
+     * Creates our merkle tree and gets our merkleRootHash to be included in block header
+     * @param transactions the transactions to create the merkle tree from
+     */
     private createMerkleTree(transactions: any[]) {
         const paddedTransactions: any[] = this.padTransactions(transactions);
         const leafNodes: Array<MerkleTreeNode> = this.createLeafNodes(paddedTransactions);
-        this.height = Math.log2(leafNodes.length) + 1;
         this.merkleRootNode = this.createMerkleNodes(leafNodes)[0]; // root node
         this.merkleRootHash = this.merkleRootNode.getHash(); // now we have created root hash
     }
 
+    /**
+     * Recursive function that builds the tree. returns array with one element when at root
+     * @param children first iteration it's the leafs, second the layer above etc etc
+     * @returns Array with one element containing root node
+     */
     private createMerkleNodes(children: Array<MerkleTreeNode>): Array<MerkleTreeNode> {
         if (children.length <= 1) return children;
         let upperLevelNodes: Array<MerkleTreeNode> = new Array<MerkleTreeNode>();
