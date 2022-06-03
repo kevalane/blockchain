@@ -23,3 +23,5 @@ class Block {
         this.blockHeader.setMerkleRoot(newMerkleTree);
     }
 }
+
+export { Block }
