@@ -22,6 +22,15 @@ class Mining {
         )
         return blockHeader;
     }
+
+    public mine(): void {
+        const difficultyString: string = "";
+        difficultyString.padStart(this.difficulty, "0");
+        while(!this.currentBlockHeader.getBlockHeaderHash().startsWith(difficultyString)) {
+            console.log(this.currentBlockHeader.getBlockHeaderHash());
+            this.currentBlockHeader.setNonce(this.currentBlockHeader.getNonce() + 1);
+        }
+    }
 }
 
 export { Mining }

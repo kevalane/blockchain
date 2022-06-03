@@ -34,6 +34,10 @@ class BlockHeader {
         this.nonce = n;
     }
 
+    public getNonce(): number {
+        return this.nonce;
+    }
+
     public setTimeStamp(t: number): void {
         this.timeStamp = t;
     }
