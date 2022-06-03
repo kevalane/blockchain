@@ -7,12 +7,11 @@ import { Wallet } from './wallet/wallet';
 // let mt1: MerkleTree  = new MerkleTree([1, 2, 3]);
 let wallet1: Wallet = new Wallet;
 let wallet2: Wallet = new Wallet;
-const input_tx: InputTx = new InputTx("genesis", 0, "");
+const input_tx: InputTx = new InputTx("genesis", 0, "", wallet1.getPrivateKey());
 const output_tx: OutputTx = new OutputTx(100, wallet1.getPublicKey());
 const t: Transaction = new Transaction(1, [input_tx], [output_tx], Date.now());
 
 console.log(t);
-const input1: InputTx = new InputTx(t.getTransactionHash(), 0, wallet2.getPublicKey());
+const input1: InputTx = new InputTx(t.getTransactionHash(), 0, wallet2.getPublicKey(), wallet1.getPrivateKey());
 const output2: OutputTx = new OutputTx(100, wallet2.getPublicKey());
-input1.signInputTx(wallet1.getPrivateKey());
 console.log(input1.verify(t));
