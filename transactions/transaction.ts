@@ -1,3 +1,4 @@
+import { createHash } from 'crypto';
 import { InputTx } from './input_tx';
 import { OutputTx } from './output_tx';
 
@@ -23,5 +24,10 @@ class Transaction {
         this.outputCounter = outputs.length;
         this.outputs = outputs;
         this.lockTime = lockTime;
+    }
+
+    public getTransactionHash(): string {
+        return createHash('sha-256').update("" + this.version + this.inputCounter + this.inputs +
+        this.outputCounter + this.outputs + this.lockTime).digest('hex');
     }
 }
