@@ -1,0 +1,5 @@
+class OutputTx {
+
+}
+
+export { OutputTx }
