@@ -30,4 +30,11 @@ class Transaction {
         return createHash('sha-256').update("" + this.version + this.inputCounter + this.inputs +
         this.outputCounter + this.outputs + this.lockTime).digest('hex');
     }
+
+    public getUtxoByIndex(index: number): OutputTx | null {
+        if (index >= 0 && index <= this.outputCounter) return this.outputs[index];
+        return null;
+    }
 }
+
+export { Transaction }
