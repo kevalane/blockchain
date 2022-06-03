@@ -16,8 +16,7 @@ class InputTx {
     }
 
     public signInputTx(privateKey: string): void {
-        const concatenatedHash: string = createHash('sha-256').
-            update(this.transactionHash + this.receiverPublicKey).digest('hex');
+        const concatenatedHash: string = createHash('sha256').update(this.transactionHash + this.receiverPublicKey).digest('hex');
         const sign = createSign('SHA256');
         sign.update(concatenatedHash).end();
         const signature = sign.sign(privateKey);
@@ -30,7 +29,7 @@ class InputTx {
         if (utxo == null) return false;
         const utxoPublicKey: string = utxo.getAddress();
         const verifier = createVerify('SHA256');
-        verifier.update(createHash('sha-256').update(this.transactionHash + this.receiverPublicKey).digest('hex'));
+        verifier.update(createHash('sha256').update(this.transactionHash + this.receiverPublicKey).digest('hex'));
         return verifier.verify(utxoPublicKey, this.senderSignature);
     }
 }

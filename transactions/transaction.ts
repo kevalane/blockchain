@@ -8,7 +8,7 @@ class Transaction {
     private inputs: InputTx[];
     private outputCounter: number;
     private outputs: OutputTx[];
-    private lockTime: Date;
+    private lockTime: number;
 
     /**
      * Creates a new transaction.
@@ -17,7 +17,7 @@ class Transaction {
      * @param outputs output transactions
      * @param lockTime if 0 execute immediately, otherwise don't include until Date.now() > lockTime
      */
-    constructor(v: number, inputs: InputTx[], outputs: OutputTx[], lockTime: Date) {
+    constructor(v: number, inputs: InputTx[], outputs: OutputTx[], lockTime: number) {
         this.version = v;
         this.inputCounter = inputs.length;
         this.inputs = inputs;
@@ -27,7 +27,7 @@ class Transaction {
     }
 
     public getTransactionHash(): string {
-        return createHash('sha-256').update("" + this.version + this.inputCounter + this.inputs +
+        return createHash('sha256').update("" + this.version + this.inputCounter + this.inputs +
         this.outputCounter + this.outputs + this.lockTime).digest('hex');
     }
 
