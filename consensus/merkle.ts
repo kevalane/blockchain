@@ -1,4 +1,5 @@
 import { createHash } from 'crypto';
+import { Transaction } from '../transactions/transaction';
 
 /*
 TODO: Add these test cases
@@ -17,7 +18,7 @@ class MerkleTree {
     private merkleRootHash: string;
     private merkleRootNode: MerkleTreeNode | null;
 
-    constructor(transactions: any[]) {
+    constructor(transactions: Transaction[]) {
         this.merkleRootHash = "";
         this.merkleRootNode = null;
         this.createMerkleTree(transactions);

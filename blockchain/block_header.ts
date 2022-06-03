@@ -1,4 +1,5 @@
 import { createHash } from "crypto";
+import { MerkleTree } from "../consensus/merkle";
 
 class BlockHeader {
     private version: number;
@@ -35,6 +36,10 @@ class BlockHeader {
 
     public setTimeStamp(t: number): void {
         this.timeStamp = t;
+    }
+
+    public setMerkleRoot(m: MerkleTree): void {
+        this.merkleRootHash = m.getMerkleRootHash();
     }
 }
 
