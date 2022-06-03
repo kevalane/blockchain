@@ -24,11 +24,13 @@ class Mining {
     }
 
     public mine(): void {
-        const difficultyString: string = "";
-        difficultyString.padStart(this.difficulty, "0");
+        let difficultyString: string = "";
+        for (let i: number = 0; i < this.difficulty; i++) {
+            difficultyString += "0";
+        }
         while(!this.currentBlockHeader.getBlockHeaderHash().startsWith(difficultyString)) {
-            console.log(this.currentBlockHeader.getBlockHeaderHash());
             this.currentBlockHeader.setNonce(this.currentBlockHeader.getNonce() + 1);
+            console.log(this.currentBlockHeader.getBlockHeaderHash());
         }
     }
 }
